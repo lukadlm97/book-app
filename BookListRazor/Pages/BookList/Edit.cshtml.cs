@@ -17,6 +17,9 @@ namespace BookListRazor
             _context = context; 
         }
 
+        [TempData]
+        public string Message { get; set; }
+
         [BindProperty]
         public Book Book { get; set; }
         public async Task OnGet(int id)
@@ -37,6 +40,7 @@ namespace BookListRazor
 
                 await _context.SaveChangesAsync();
 
+                Message = "Book has been updated succesfully.";
                 return RedirectToPage("Index");
             }
             return RedirectToPage();

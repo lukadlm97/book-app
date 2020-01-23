@@ -17,6 +17,9 @@ namespace BookListRazor
             _context = context;
         }
 
+        [TempData]
+        public string Message { get; set; }
+
         [BindProperty]
         public Book Book { get; set; }
         public void OnGet()
@@ -32,6 +35,7 @@ namespace BookListRazor
             }
             _context.Books.Add(Book);
             await _context.SaveChangesAsync();
+            Message = "Book has created succesfully.";
             return RedirectToPage("Index");
         }
     }
